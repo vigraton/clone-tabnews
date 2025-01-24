@@ -3,7 +3,7 @@ services:
     container_name: "postgres_dev"
     image: "postgres:16-alpine3.20"
     env_file:
-      - ../.env
+      - ../.env.development
     environment:
       POSTGRES_PASSWORD: "local_password"
     ports:
