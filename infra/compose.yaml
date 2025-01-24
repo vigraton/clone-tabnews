@@ -1,7 +1,10 @@
-services: 
+services:
   database:
-    image: 'postgres:16-alpine3.20'
-    environment: 
-      POSTGRES_PASSWORD: 'local_password'
+    container_name: "postgres_dev"
+    image: "postgres:16-alpine3.20"
+    env_file:
+      - ../.env
+    environment:
+      POSTGRES_PASSWORD: "local_password"
     ports:
       - "5432:5432"
