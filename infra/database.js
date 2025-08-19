@@ -3,7 +3,7 @@ import { Client } from "pg";
 async function query(queryObject) {
   let client;
   try {
-    client = await getNewClient();
+    client = getNewClient();
     await client.connect();
     const result = await client.query(queryObject);
     return result;
@@ -11,11 +11,13 @@ async function query(queryObject) {
     console.error(error);
     throw error;
   } finally {
-    await client.end();
+    if (client){
+      await client.end();
+    }
   }
 }
 
-async function getNewClient() {
+function getNewClient() {
   const client = new Client({
     host: process.env.POSTGRES_HOST,
     port: process.env.POSTGRES_PORT,
@@ -25,7 +27,6 @@ async function getNewClient() {
     ssl: getSSLValues(),
   });
 
-  await client.connect();
   return client;
 }
 
