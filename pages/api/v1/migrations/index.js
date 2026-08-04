@@ -12,7 +12,6 @@ router.post(postHandler);
 export default router.handler(controller.errorHandlers);
 
 const defaultMigrationsOptions = {
-  dbClient: dbClient,
   dryRun: true,
   dir: resolve("infra", "migrations"),
   direction: "up",
